@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mikkel Bønnelykke Christensen — Commercial Systems &amp; Automation</title>
+<meta name="description" content="Mikkel Bønnelykke Christensen — Commercial Development Team Lead at Whiteaway Group. Data, automation, and pricing systems across PIM, ERP, and commercial tooling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --paper:#F6F5F2;
+    --paper-raised:#FFFFFF;
+    --slate:#5B6570;
+    --slate-soft:#68717D;
+    --teal:#2B6E6E;
+    --teal-deep:#1D4E4E;
+    --line:#DEDBD3;
+    --line-soft:#E9E7E1;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--teal);color:var(--paper);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{
+      opacity:0;
+      transform:translateY(16px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.is-visible{opacity:1;transform:none;}
+  }
+
+  /* ---------- layout shell ---------- */
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,245,242,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    max-width:920px;margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--mono);font-size:13px;letter-spacing:.02em;
+    color:var(--ink);text-decoration:none;font-weight:500;
+    display:flex;align-items:center;gap:8px;
+  }
+  .nav-mark .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);display:inline-block;}
+  .nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0;}
+  .nav-links a{
+    font-family:var(--mono);font-size:12.5px;text-decoration:none;color:var(--slate);
+    letter-spacing:.03em;text-transform:uppercase;
+    padding-bottom:3px;border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .nav-links a:hover{color:var(--teal);border-color:var(--teal);}
+  .nav-toggle{display:none;}
+  @media (max-width:680px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:120px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-family:var(--mono);font-size:12.5px;color:var(--teal);
+    letter-spacing:.08em;text-transform:uppercase;margin:0 0 22px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero-eyebrow::before{
+    content:'';width:26px;height:1px;background:var(--teal);display:inline-block;
+  }
+  h1.name{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.6rem, 6.5vw, 4.6rem);
+    line-height:1.02;
+    margin:0 0 22px;
+    letter-spacing:-0.01em;
+  }
+  h1.name em{font-style:italic;font-weight:300;color:var(--teal-deep);}
+  .hero-role{
+    font-family:var(--sans);font-weight:600;font-size:1.18rem;
+    color:var(--ink);margin:0 0 18px;max-width:640px;
+  }
+  .hero-lede{
+    font-size:1.05rem;color:var(--slate);max-width:560px;margin:0 0 36px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    font-family:var(--mono);font-size:13px;letter-spacing:.02em;
+    text-decoration:none;padding:12px 22px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn-primary{background:var(--ink);color:var(--paper);border:1px solid var(--ink);}
+  .btn-primary:hover{background:var(--teal-deep);border-color:var(--teal-deep);transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--slate);background:transparent;}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-1px);}
+
+  /* signature: the flow-line motif threading through the page */
+  .flow{
+    position:absolute;right:-40px;top:60px;width:340px;height:340px;
+    opacity:0.55;pointer-events:none;
+  }
+  @media (max-width:760px){ .flow{display:none;} }
+
+  /* ---------- stat rail ---------- */
+  .stat-rail{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:34px 0;
+  }
+  .stat-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  }
+  .stat{padding:0 22px;border-left:1px solid var(--line-soft);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat-num{
+    font-family:var(--serif);font-size:2.1rem;font-weight:500;color:var(--teal-deep);
+    line-height:1;margin-bottom:8px;
+  }
+  .stat-label{font-size:.82rem;color:var(--slate);line-height:1.4;}
+  @media (max-width:680px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:26px;}
+    .stat{border-left:none;padding-left:0;}
+    .stat:nth-child(2n){padding-left:22px;border-left:1px solid var(--line-soft);}
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section, header.hero, footer{scroll-margin-top:76px;}
+  section{padding:90px 0;}
+  .section-head{margin-bottom:48px;}
+  .section-kicker{
+    font-family:var(--mono);font-size:12px;color:var(--slate-soft);
+    letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;
+  }
+  h2.section-title{
+    font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.3rem);
+    margin:0;letter-spacing:-0.01em;
+  }
+  h2.section-title em{font-style:italic;color:var(--teal-deep);font-weight:300;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;}
+  .about-text p{color:var(--slate);font-size:1rem;margin:0 0 18px;}
+  .about-text strong{color:var(--ink);}
+  .about-side{border-left:1px solid var(--line);padding-left:28px;}
+  .side-item{margin-bottom:26px;}
+  .side-item:last-child{margin-bottom:0;}
+  .side-label{font-family:var(--mono);font-size:11px;color:var(--slate-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+  .side-value{font-size:.95rem;color:var(--ink);font-weight:500;}
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;gap:36px;}
+    .about-side{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:24px;}
+  }
+
+  /* ---------- experience timeline ---------- */
+  .timeline{position:relative;}
+  .timeline::before{
+    content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;
+    background:linear-gradient(var(--teal), var(--line) 85%);
+  }
+  .role{position:relative;padding:0 0 44px 40px;}
+  .role:last-child{padding-bottom:0;}
+  .role::before{
+    content:'';position:absolute;left:0;top:6px;width:15px;height:15px;
+    border-radius:50%;background:var(--paper);border:2px solid var(--teal);
+  }
+  .role.current::before{background:var(--teal);}
+  .role-top{
+    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 20px;
+    margin-bottom:4px;
+  }
+  .role-title{font-family:var(--sans);font-weight:700;font-size:1.05rem;color:var(--ink);}
+  .role-date{font-family:var(--mono);font-size:12px;color:var(--slate-soft);white-space:nowrap;}
+  .role-company{
+    font-size:.9rem;color:var(--teal-deep);font-weight:600;margin-bottom:12px;
+  }
+  .role-company span{color:var(--slate-soft);font-weight:400;}
+  .role ul{margin:0;padding-left:18px;color:var(--slate);font-size:.94rem;}
+  .role li{margin-bottom:7px;}
+  .role li:last-child{margin-bottom:0;}
+  .role-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+  .tag{
+    font-family:var(--mono);font-size:11px;color:var(--teal-deep);
+    background:rgba(43,110,110,0.08);padding:4px 10px;border-radius:2px;
+  }
+  .role-more{margin-top:14px;}
+  .role-more summary{
+    cursor:pointer;font-family:var(--mono);font-size:11.5px;color:var(--slate-soft);
+    list-style:none;text-transform:uppercase;letter-spacing:.05em;
+  }
+  .role-more summary::-webkit-details-marker{display:none;}
+  .role-more summary::before{content:'+ ';color:var(--teal);}
+  .role-more[open] summary::before{content:'– ';}
+  .role-more ul{margin-top:12px;}
+
+  .earlier-roles{margin-top:8px;}
+  .earlier-roles summary{
+    cursor:pointer;font-family:var(--mono);font-size:12.5px;color:var(--teal-deep);
+    list-style:none;padding:14px 0;border-top:1px solid var(--line);
+  }
+  .earlier-roles summary::-webkit-details-marker{display:none;}
+  .earlier-roles summary::before{content:'→ ';}
+  .earlier-roles[open] summary::before{content:'↓ ';}
+
+  /* ---------- education ---------- */
+  .edu-grid{display:grid;gap:0;}
+  .edu-item{
+    display:grid;grid-template-columns:110px 1fr;gap:24px;
+    padding:22px 0;border-top:1px solid var(--line-soft);
+  }
+  .edu-item:last-child{border-bottom:1px solid var(--line-soft);}
+  .edu-date{font-family:var(--mono);font-size:12px;color:var(--slate-soft);padding-top:3px;}
+  .edu-degree{font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:4px;}
+  .edu-school{font-size:.9rem;color:var(--teal-deep);margin-bottom:8px;}
+  .edu-desc{font-size:.9rem;color:var(--slate);}
+  @media (max-width:600px){
+    .edu-item{grid-template-columns:1fr;gap:6px;}
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .skill-card{
+    background:var(--paper-raised);border:1px solid var(--line-soft);
+    padding:26px 24px;border-radius:3px;
+  }
+  .skill-cat{
+    font-family:var(--mono);font-size:11.5px;color:var(--teal-deep);
+    text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;
+  }
+  .skill-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-pill{
+    font-size:.84rem;color:var(--ink);background:var(--paper);
+    border:1px solid var(--line-soft);padding:5px 11px;border-radius:20px;
+  }
+  @media (max-width:760px){ .skills-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:500px){ .skills-grid{grid-template-columns:1fr;} }
+
+  /* ---------- footer / contact ---------- */
+  footer{
+    background:var(--ink);color:var(--paper);padding:80px 0 40px;margin-top:40px;
+  }
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;margin-bottom:56px;}
+  .footer-title{
+    font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.6rem);font-weight:500;
+    max-width:520px;line-height:1.15;margin:0 0 8px;
+  }
+  .footer-title em{font-style:italic;color:#7FBFBF;font-weight:300;}
+  .footer-sub{color:#9AA3AC;font-size:.95rem;max-width:440px;}
+  .footer-contacts{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+  .contact-link{
+    font-family:var(--mono);font-size:13.5px;color:var(--paper);text-decoration:none;
+    display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.2);
+    padding-bottom:4px;transition:border-color .2s ease, color .2s ease;
+  }
+  .contact-link:hover{border-color:#7FBFBF;color:#7FBFBF;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:var(--mono);font-size:11.5px;color:#8B939C;
+  }
+
+  @media (max-width:680px){
+    header.hero{padding:90px 0 64px;}
+    section{padding:64px 0;}
+    .about-grid{gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-mark"><span class="dot"></span>M.B. Christensen</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">Commercial systems · data · automation</p>
+    <h1 class="name">Mikkel Bønnelykke<br><em>Christensen</em></h1>
+    <p class="hero-role">Commercial Development Team Lead, driving scalable commercial growth through data &amp; automation</p>
+    <p class="hero-lede">I build the infrastructure that turns messy product and pricing data into systems people can actually run a business on — across PIM, ERP, and pricing engines, in Aarhus, Denmark.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">See the work →</a>
+      <a href="mailto:mikkelgbc@gmail.com" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <svg class="flow" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="40" cy="60" r="4" fill="#2B6E6E"/>
+    <circle cx="150" cy="40" r="4" fill="#2B6E6E" opacity="0.6"/>
+    <circle cx="240" cy="110" r="4" fill="#2B6E6E"/>
+    <circle cx="120" cy="160" r="4" fill="#2B6E6E" opacity="0.5"/>
+    <circle cx="230" cy="220" r="4" fill="#2B6E6E"/>
+    <circle cx="60" cy="240" r="4" fill="#2B6E6E" opacity="0.6"/>
+    <path d="M40 60 L150 40 L240 110 L120 160 L230 220 L60 240" stroke="#2B6E6E" stroke-width="1" opacity="0.35"/>
+  </svg>
+</header>
+
+<div class="stat-rail">
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Years in commercial data &amp; automation, Whiteaway Group</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Core languages — R, VBA, SQL, Python — used in production tooling</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">11+</div>
+        <div class="stat-label">Storefronts supported across PIM &amp; pricing systems</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">★</div>
+        <div class="stat-label">Effort of the Month, Whiteaway Group</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-kicker">Who I am</p>
+      <h2 class="section-title">Where <em>data</em> meets the P&amp;L</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I specialize in <strong>data analysis, process optimization, and stakeholder management</strong> — but what I actually spend my time doing is building the tools that make those things possible. Pricing engines, PIM pipelines, ERP integrations: systems that quietly do the routine work so people can focus on the decisions that matter.</p>
+        <p>My approach is rooted in <strong>Design Thinking</strong> — understand what the user actually needs, generate ideas, prototype fast, test with the people who'll use it. As my own project manager on most of what I build, I've learned to work closely with stakeholders across Commercial, Sales, and B2B, translating complex datasets and SQL insights into tools non-technical teams can trust.</p>
+        <p>I'm continually pulled toward new tools and technologies — most of what I know about automation and modern tooling, I taught myself, and I still spend my free time doing exactly that.</p>
+      </div>
+      <div class="about-side reveal">
+        <div class="side-item">
+          <div class="side-label">Currently</div>
+          <div class="side-value">Commercial Development Team Lead, Whiteaway Group</div>
+        </div>
+        <div class="side-item">
+          <div class="side-label">Based in</div>
+          <div class="side-value">Aarhus, Denmark</div>
+        </div>
+        <div class="side-item">
+          <div class="side-label">Core toolkit</div>
+          <div class="side-value">R · VBA · SQL · Python · Power Query · Power Automate</div>
+        </div>
+        <div class="side-item">
+          <div class="side-label">Systems</div>
+          <div class="side-value">Pimberly (PIM) · PriceEdge · Icecat · EPREL · ERP</div>
+        </div>
+        <div class="side-item">
+          <div class="side-label">Languages</div>
+          <div class="side-value">Danish — Native · English — Full professional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--paper-raised);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-kicker">Career so far</p>
+      <h2 class="section-title">Building the <em>engine room</em></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="role current reveal">
+        <div class="role-top">
+          <span class="role-title">Commercial Development Team Lead</span>
+          <span class="role-date">May 2026 — Present</span>
+        </div>
+        <div class="role-company">Whiteaway Group <span>· Aarhus, Denmark</span></div>
+        <ul>
+          <li>Set the technical direction for the team, prioritizing development efforts and coaching specialists to deliver high-value business solutions</li>
+          <li>Own and evolve the architecture across Automation, Tooling, and PIM, keeping systems scalable and aligned with business growth</li>
+          <li>Establish and optimize the commercial "engine room," enabling data-driven pricing and automated workflows across all commercial functions</li>
+          <li>Act as the technical bridge between data and business, translating complex datasets and SQL insights into tools decision-makers can use</li>
+        </ul>
+        <div class="role-tags">
+          <span class="tag">Architecture</span><span class="tag">Team Leadership</span><span class="tag">PIM</span><span class="tag">Pricing Systems</span>
+        </div>
+      </div>
+
+      <div class="role reveal">
+        <div class="role-top">
+          <span class="role-title">Commercial Analyst</span>
+          <span class="role-date">Mar 2024 — May 2026</span>
+        </div>
+        <div class="role-company">Whiteaway Group <span>· Aarhus, Denmark</span></div>
+        <ul>
+          <li>Owned and optimized the PIM ecosystem and content automation, including API/FTP integrations and large-scale product enrichment (e.g., Icecat via Python)</li>
+          <li>Responsible for dynamic pricing in PriceEdge; developed multiple markup models enabling competitive, rule-based pricing across categories, brands, and segments</li>
+          <li>Built and maintained internal tooling (Excel/VBA, SQL, R, Power Automate) connecting ERP, PIM, and forecast &amp; replenishment systems</li>
+        </ul>
+        <details class="role-more">
+          <summary>More detail</summary>
+          <ul>
+            <li>Developed a B2B platform for assortment visibility, segment-based pricing, and order/offer management</li>
+            <li>Automated commercial workflows and data flows across systems using Python, R, VBA, and SQL</li>
+            <li>Built campaign planning and collaboration tools, improving coordination between Commercial, Sales, and Marketing</li>
+            <li>Recognized with "Effort of the Month" and multiple nominations</li>
+          </ul>
+        </details>
+        <div class="role-tags">
+          <span class="tag">PriceEdge</span><span class="tag">Python</span><span class="tag">Icecat</span><span class="tag">B2B Platform</span>
+        </div>
+      </div>
+
+      <div class="role reveal">
+        <div class="role-top">
+          <span class="role-title">Supply Chain Developer</span>
+          <span class="role-date">Jun 2022 — Feb 2024</span>
+        </div>
+        <div class="role-company">Salling Group <span>· Aarhus, Denmark</span></div>
+        <ul>
+          <li>Developed, maintained, and optimized Excel models used in Goods Flow processes to analyze data and inform decisions</li>
+          <li>Conducted ad-hoc analytical tasks, generating reports and actionable recommendations</li>
+          <li>Supported cross-organizational projects through data analysis, tool development, and presentations</li>
+        </ul>
+        <div class="role-tags">
+          <span class="tag">Excel / VBA</span><span class="tag">Goods Flow</span>
+        </div>
+      </div>
+
+      <details class="earlier-roles reveal">
+        <summary>Earlier roles (2018 — 2022)</summary>
+        <div class="timeline" style="margin-top:20px;">
+          <div class="role">
+            <div class="role-top">
+              <span class="role-title">Student Assistant · Interim Supply Chain Coordinator · Intern</span>
+              <span class="role-date">Aug 2021 — Jun 2022</span>
+            </div>
+            <div class="role-company">Salling Group <span>· Aarhus, Denmark</span></div>
+            <ul>
+              <li>Progressed through Intern, Interim Supply Chain Coordinator, and Student Assistant roles while completing a Master's Thesis in Machine Learning</li>
+              <li>Managed Goods Flow and out-of-stock resolution for the Computer category across Føtex, Bilka, and BR, in-store and e-commerce</li>
+              <li>Built a data-driven heuristic allocation model for outdoor plants to reduce waste and lost sales</li>
+            </ul>
+          </div>
+          <div class="role">
+            <div class="role-top">
+              <span class="role-title">Student Assistant</span>
+              <span class="role-date">Jan 2021 — Aug 2021</span>
+            </div>
+            <div class="role-company">Expedit <span>· Hadsten, Denmark</span></div>
+            <ul>
+              <li>Maintained planning data — orders, allocation, master data, parameters — in Aspect4; built a VBA sourcing simulation model</li>
+              <li>Designed Excel RFQ templates and ran an internal Excel course on VLOOKUP, pivot tables, and practical tips</li>
+            </ul>
+          </div>
+          <div class="role">
+            <div class="role-top">
+              <span class="role-title">Instructor in Corporate Finance</span>
+              <span class="role-date">Sep 2018 — Jan 2019</span>
+            </div>
+            <div class="role-company">Syddansk Universitet <span>· Region Syddanmark, Denmark</span></div>
+            <ul>
+              <li>Taught theory and assignment support to fellow students and proofread exam papers; rated above the prior year's cohort for preparation and clarity</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-kicker">Academic background</p>
+      <h2 class="section-title">Foundations in <em>analytics</em></h2>
+    </div>
+    <div class="edu-grid reveal">
+      <div class="edu-item">
+        <div class="edu-date">2020 — 2022</div>
+        <div>
+          <div class="edu-degree">Cand.merc., Operations &amp; Supply Chain Analytics</div>
+          <div class="edu-school">Aarhus BSS — Aarhus University</div>
+          <div class="edu-desc">Master's thesis in Machine Learning applied to operational forecasting and decision-making.</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-date">2016 — 2019</div>
+        <div>
+          <div class="edu-degree">BSc. Economics and Business Administration</div>
+          <div class="edu-school">Syddansk Universitet — International Business</div>
+          <div class="edu-desc">Core business and economics foundation with an international focus.</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-date">2013 — 2016</div>
+        <div>
+          <div class="edu-degree">Højere Handelseksamen (HHX)</div>
+          <div class="edu-school">Svendborg Handelsgymnasium — Matematik og økonomi</div>
+          <div class="edu-desc">Upper secondary specialization in mathematics and economics.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--paper-raised);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="section-kicker">What I bring</p>
+      <h2 class="section-title">Tools of the <em>trade</em></h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-cat">Languages &amp; scripting</div>
+        <div class="skill-list">
+          <span class="skill-pill">R</span><span class="skill-pill">VBA</span>
+          <span class="skill-pill">SQL</span><span class="skill-pill">Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Automation &amp; tooling</div>
+        <div class="skill-list">
+          <span class="skill-pill">Power Automate</span><span class="skill-pill">Power Query</span>
+          <span class="skill-pill">Excel (Advanced)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Commercial systems</div>
+        <div class="skill-list">
+          <span class="skill-pill">Pimberly (PIM)</span><span class="skill-pill">PriceEdge</span>
+          <span class="skill-pill">Icecat</span><span class="skill-pill">EPREL</span><span class="skill-pill">ERP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Strategy &amp; approach</div>
+        <div class="skill-list">
+          <span class="skill-pill">Design Thinking</span><span class="skill-pill">Pricing Strategy</span>
+          <span class="skill-pill">Process Automation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Leadership</div>
+        <div class="skill-list">
+          <span class="skill-pill">Stakeholder Management</span><span class="skill-pill">Team Coaching</span>
+          <span class="skill-pill">Technical Direction</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Certifications &amp; languages</div>
+        <div class="skill-list">
+          <span class="skill-pill">Data Science Cert. (Mod. 1–6)</span>
+          <span class="skill-pill">Danish — Native</span><span class="skill-pill">English — Fluent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h2 class="footer-title">Let's talk <em>systems</em>,<br>data, or what's next.</h2>
+        <p class="footer-sub">Open to conversations about commercial data, automation, and building tools that hold up in production.</p>
+      </div>
+      <div class="footer-contacts">
+        <a class="contact-link" href="mailto:mikkelgbc@gmail.com">mikkelgbc@gmail.com</a>
+        <a class="contact-link" href="tel:+4528112536">+45 28 11 25 36</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/mikkelbonnelykke" target="_blank" rel="noopener">linkedin.com/in/mikkelbonnelykke</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mikkel Bønnelykke Christensen · Aarhus, Denmark</span>
+      <span>Built with intent, not a template</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
